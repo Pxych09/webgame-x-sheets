@@ -1195,11 +1195,12 @@ body {
 }
 
 #scoreUpdateToast {
+    display: none;
     margin-top: 2.5em;
     /* width: 35vw; */
 }
 .navbar {
-    margin-top: 4.5em;
+    margin-top: 0em;
 }
 .leaderboard-scores {
     display: grid;
