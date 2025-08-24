@@ -248,6 +248,8 @@ async function register(username, password) {
             // Clear register form
             document.getElementById('regUsername').value = '';
             document.getElementById('regPassword').value = '';
+            document.querySelector('.divider').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'none';
         } else {
             showMessage(result.message || 'Registration failed', 'error');
         }
