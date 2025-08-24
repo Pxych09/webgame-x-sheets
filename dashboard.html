@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Portal - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/808/808439.png" type="image/png">
+</head>
+<body>
+    <!-- Page Loading Overlay -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="game-loader">
+                <div class="loader-icon">🎮</div>
+                <div class="loader-text">Loading Dashboard...</div>
+                <div class="loader-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand">🎮 Game Portal</div>
+        <div class="nav-user">
+            <span id="welcomeUser">Loading...</span>
+            <button id="logoutBtn" class="btn btn-outline">Logout</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- User Stats Panel -->
+        <div class="stats-panel">
+            <h2>Your Stats</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Number Guessing</h3>
+                    <div class="score loading-placeholder" id="game1Score">
+                        <div class="loading-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>Memory Match</h3>
+                    <div class="score loading-placeholder" id="game2Score">
+                        <div class="loading-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3>Quick Click</h3>
+                    <div class="score loading-placeholder" id="game3Score">
+                        <div class="loading-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card total-score">
+                    <h3>Total Score</h3>
+                    <div class="score loading-placeholder" id="totalScore">
+                        <div class="loading-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games Section -->
+        <div class="games-section">
+            <h2>Choose Your Game</h2>
+            <div class="games-grid">
+                <!-- Game 1: Number Guessing -->
+                <div class="game-card" id="game1">
+                    <h3>🎯 Number Guessing</h3>
+                    <p>Guess the number between 1-100. Fewer attempts = higher score!</p>
+                    <button class="btn btn-game" onclick="startGame(1)">Play Now</button>
+                </div>
+
+                <!-- Game 2: Memory Match -->
+                <div class="game-card" id="game2">
+                    <h3>🧠 Memory Match</h3>
+                    <p>Match all the pairs. Complete faster for a better score!</p>
+                    <button class="btn btn-game" onclick="startGame(2)">Play Now</button>
+                </div>
+
+                <!-- Game 3: Quick Click -->
+                <div class="game-card" id="game3">
+                    <h3>⚡ Quick Click</h3>
+                    <p>Click the targets as fast as you can. Speed is everything!</p>
+                    <button class="btn btn-game" onclick="startGame(3)">Play Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard-section">
+            <h2>🏆 Leaderboard</h2>
+            <div id="leaderboard" class="leaderboard">
+                <div class="leaderboard-loading">
+                    <div class="loading-skeleton">
+                        <div class="skeleton-item">
+                            <div class="skeleton-rank"></div>
+                            <div class="skeleton-user"></div>
+                            <div class="skeleton-scores"></div>
+                            <div class="skeleton-total"></div>
+                        </div>
+                        <div class="skeleton-item">
+                            <div class="skeleton-rank"></div>
+                            <div class="skeleton-user"></div>
+                            <div class="skeleton-scores"></div>
+                            <div class="skeleton-total"></div>
+                        </div>
+                        <div class="skeleton-item">
+                            <div class="skeleton-rank"></div>
+                            <div class="skeleton-user"></div>
+                            <div class="skeleton-scores"></div>
+                            <div class="skeleton-total"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="refreshLeaderboard" class="btn btn-outline refresh-btn" onclick="refreshLeaderboard()">
+                <span class="refresh-text">
+                    <span class="refresh-icon">🔄</span>
+                    Refresh
+                </span>
+                <span class="refresh-loading">
+                    <span class="spinner"></span>
+                    Refreshing...
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Modals -->
+    
+    <!-- Game 1: Number Guessing Modal -->
+    <div id="game1Modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGame(1)">&times;</span>
+            <h2>🎯 Number Guessing Game</h2>
+            <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+            <div class="game-area">
+                <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="100">
+                <button class="btn btn-primary" onclick="makeGuess()" id="guessBtn">
+                    <span class="btn-text">Guess!</span>
+                    <span class="btn-loader">
+                        <span class="spinner"></span>
+                        Processing...
+                    </span>
+                </button>
+                <div id="guessResult"></div>
+                <div id="attemptsCount">Attempts: 0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game 2: Memory Match Modal -->
+    <div id="game2Modal" class="modal">
+        <div class="modal-content memory-game">
+            <span class="close" onclick="closeGame(2)">&times;</span>
+            <h2>🧠 Memory Match Game</h2>
+            <div class="game-info">
+                <span id="matchesFound">Matches: 0/8</span>
+                <span id="gameTimer">Time: 0s</span>
+            </div>
+            <div id="memoryGrid" class="memory-grid">
+                <div class="game-loading">
+                    <span class="spinner"></span>
+                    <span>Setting up game...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game 3: Quick Click Modal -->
+    <div id="game3Modal" class="modal">
+        <div class="modal-content quick-click-game">
+            <span class="close" onclick="closeGame(3)">&times;</span>
+            <h2>⚡ Quick Click Game</h2>
+            <div class="game-info">
+                <span id="clickScore">Score: 0</span>
+                <span id="clickTimer">Time: 30s</span>
+            </div>
+            <div id="clickGameArea" class="click-game-area">
+                <button class="btn btn-primary" onclick="startClickGame()">Start Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Score Update Loading Toast -->
+    <div id="scoreUpdateToast" class="score-toast">
+        <div class="toast-content">
+            <span class="spinner"></span>
+            <span>Updating score...</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

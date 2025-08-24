@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Portal - Login</title>
+    <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/808/808439.png" type="image/png">
+</head>
+<body>
+    <!-- Page Loading Overlay -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <div class="game-loader">
+                <div class="loader-icon">🎮</div>
+                <div class="loader-text">Loading Game Portal...</div>
+                <div class="loader-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <h1>🎮 Game Portal</h1>
+            <p class="subtitle">Welcome to the ultimate gaming experience</p>
+            
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <span class="btn-text">Login</span>
+                    <span class="btn-loader">
+                        <span class="spinner"></span>
+                        Logging in...
+                    </span>
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="regUsername">New Username</label>
+                    <input type="text" id="regUsername" name="regUsername" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">New Password</label>
+                    <input type="password" id="regPassword" name="regPassword" required>
+                </div>
+                
+                <button type="submit" class="btn btn-secondary" id="registerBtn">
+                    <span class="btn-text">Register</span>
+                    <span class="btn-loader">
+                        <span class="spinner"></span>
+                        Creating account...
+                    </span>
+                </button>
+            </form>
+            
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    
+    <div class="background-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
